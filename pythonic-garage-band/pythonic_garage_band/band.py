@@ -76,6 +76,9 @@ if __name__=="__main__":
     Band("the nobody",[])
     eman=Guitarist("EMAN")
     print(Musician.to_all())
+    elyas=Band("elyas")
+    print(elyas.play_solos())
+    
 
 
 
