@@ -1,24 +1,19 @@
-
+from abc import ABC ,abstractmethod
 
 class Band:
     instances=[]
 
-    def __init__(self,name,members=None):
+    def __init__(self,name,members):
         self.name=name
         self.members=members
-        Band.instances.append(name)
+        Band.instances.append(self)
 
     
-    def __str__(self):
-        return f"The Band name is : {self.name}"
-
-    def __repr__(self):
-        return f"Band instance name is : {self.name},members ={self.members}"
-
+   
     def play_solos(self):
         solo_array=[]
-        for i in self.members:
-            solo_array.append(i.play_solo())
+        for member in self.members:
+            solo_array.append(member.play_solo())
         return solo_array
 
     @classmethod
@@ -26,14 +21,21 @@ class Band:
         return cls.instances
 
 
+    def __str__(self):
+        return f"The Band name is : {self.name}"
 
-class Musician :
+    def __repr__(self):
+        return f"Band instance name is : {self.name},members ={self.members}"
 
-    def __init__(self,name,instrument,role,solo):
+class Musician(ABC) :
+    """
+    this class represents Musician (ABSTRACT)
+    methods: play_solo()
+    """
+    def __init__(self,name):
         self.name=name
-        self.instrument=instrument
-        self.role=role
-        self.solo=solo
+       
+         
 
     def __str__(self):
         return f'my name is : {self.name} and i play on this instrument : {self.instrument}'
@@ -51,34 +53,53 @@ class Musician :
 
 class Guitarist(Musician):
 
-    def __init__ (self,name):
-        super.__init__(name,"guetar","Guitarist","  Reed MusicKen Murray ")
+    def get_instrument(self):
+        return "guitar"
 
+    
+    def play_solo(self):
+        return "face melting guitar solo"
 
+    def __str__(self):
+        return f'My name is {self.name} and I play {self.get_instrument()}'
+    
+    def __repr__(self):
+        return f"{self.__class__.__name__} instance. Name = {self.name}"
+     
 class Bassist(Musician):
 
-    def __init__ (self,name):
-        super.__init__(name,"bass","Bassist","Dragonetti 12 Waltzes sheet music for double-bass solo ")
- 
+    def get_instrument(self):
+        return "bass"
 
+    
+    def play_solo(self):
+        return "bom bom buh bom"
+
+    def __str__(self):
+        return f'My name is {self.name} and I play {self.get_instrument()}'
+    
+    def __repr__(self):
+        return f"{self.__class__.__name__} instance. Name = {self.name}"
+     
 
 
 class Drummer(Musician):
 
-    def __init__ (self,name):
-        super.__init__(name,"drums","Drummer","Guitarist","Tail Spin , Snare Drum Solo     ")
+     def get_instrument(self):
+        return "drums"
 
-
-if __name__=="__main__":
-    # test the classes here 
-
-    print(Band.to_list()==[])
-    Band("the nobody",[])
-    eman=Guitarist("EMAN")
-    print(Musician.to_all())
-    elyas=Band("elyas")
-    print(elyas.play_solos())
     
+     def play_solo(self):
+        return "rattle boom crash"
+
+     def __str__(self):
+        return f'My name is {self.name} and I play {self.get_instrument()}'
+    
+     def __repr__(self):
+        return f"{self.__class__.__name__} instance. Name = {self.name}"
+
+ 
+     
 
 
 
